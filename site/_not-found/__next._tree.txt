@@ -1,4 +1,4 @@
 :HL["/coruls-status/_next/static/chunks/1eclz_7gteniq.css","style"]
 2:[["children",{"s":"__PAGE__","h":160}]]
 1:[["children",{"s":"/_not-found","h":64,"c":"$Q2"}]]
-0:{"b":"IBEkmc-pKgAxNAYLFRMeE","t":{"t":{"s":"","h":16,"c":"$Q1"}}}
+0:{"b":"imnfqxI9OOnaMvY3InKZo","t":{"t":{"s":"","h":16,"c":"$Q1"}}}

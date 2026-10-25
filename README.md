@@ -16,4 +16,4 @@ Workflow uruchamia się ręcznie (Actions → Status → Run workflow), a strona
 
 ## Po starcie produkcji
 
-Workflow działa co 5 minut. Usługa, która dwa razy z rzędu nie odpowiada, otwiera zgłoszenie „Awaria: …”, o którym GitHub powiadamia e-mailem; zgłoszenie zamyka się samo, gdy wszystkie usługi znów działają. Odpowiedź wolniejsza niż 3 s to zakłócenia, a strona prac serwisowych Caddy i zapowiedziane prace to prace serwisowe.
+Workflow działa co 5 minut. Usługa, która dwa razy z rzędu nie odpowiada, otwiera zgłoszenie „Awaria: …” przypisane do właściciela repozytorium, o którym GitHub powiadamia e-mailem; zgłoszenie zamyka się samo, gdy wszystkie usługi znów działają. Odpowiedź wolniejsza niż 3 s to zakłócenia, a strona prac serwisowych Caddy i zapowiedziane prace to prace serwisowe.

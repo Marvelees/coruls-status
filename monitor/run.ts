@@ -54,6 +54,15 @@ async function github(path: string, method: "POST" | "PATCH", body: unknown): Pr
   return (await response.json()) as { number: number };
 }
 
+/**
+ * An issue is assigned to the repository's owner and mentions them, so GitHub e-mails it as their own ("Participating"),
+ * whatever their settings for watched repositories (rekomendacja przyjęta 2026-10-25).
+ */
+async function openIssue(title: string, lines: string[]) {
+  const owner = process.env.GITHUB_REPOSITORY_OWNER;
+  return github("/issues", "POST", { title, body: [...(owner ? [`@${owner}`, ""] : []), ...lines].join("\n"), assignees: owner ? [owner] : [] });
+}
+
 const describe = (checks: Check[], services: ServiceKey[]) =>
   services.map((s) => {
     const c = checks.find((x) => x.service === s)!;
@@ -66,7 +75,7 @@ async function alert(before: Stored, after: Stored, checks: Check[], now: number
   if (!action) return after.issue;
   if (action.kind === "open") {
     const lines = [`Usługi nie odpowiadają w kolejnych sprawdzeniach (${time(now)}):`, ...describe(checks, action.services), "", `Zgłoszenie zamknie się samo, gdy wszystkie usługi znów zadziałają. Strona statusu: ${PAGE}`];
-    return (await github("/issues", "POST", { title: `Awaria: ${action.services.map((s) => NAMES[s]).join(", ")}`, body: lines.join("\n") })).number;
+    return (await openIssue(`Awaria: ${action.services.map((s) => NAMES[s]).join(", ")}`, lines)).number;
   }
   if (action.kind === "update") {
     await github(`/issues/${after.issue}/comments`, "POST", { body: [`Teraz nie odpowiadają (${time(now)}):`, ...describe(checks, action.services)].join("\n") });
@@ -79,10 +88,9 @@ async function alert(before: Stored, after: Stored, checks: Check[], now: number
 
 /** The test of the e-mail path the owner asked for: an issue opened and closed at once (rekomendacja przyjęta 2026-10-25). */
 async function alertTest(now: number) {
-  const issue = await github("/issues", "POST", {
-    title: "Test powiadomienia ze strony statusu",
-    body: `Zgłoszenie testowe z ręcznego przebiegu monitoringu (${time(now)}). Jeśli przyszedł o nim e-mail, powiadomienia o awariach działają. Zgłoszenie zamyka się od razu.`,
-  });
+  const issue = await openIssue("Test powiadomienia ze strony statusu", [
+    `Zgłoszenie testowe z ręcznego przebiegu monitoringu (${time(now)}). Jeśli przyszedł o nim e-mail, powiadomienia o awariach działają. Zgłoszenie zamyka się od razu.`,
+  ]);
   await github(`/issues/${issue.number}`, "PATCH", { state: "closed" });
   console.log(`test issue #${issue.number} opened and closed`);
 }
