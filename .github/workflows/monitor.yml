@@ -1,0 +1,60 @@
+# Monitoring and the status page of Coruls (D9.28), published from the Coruls repository (apps/status). Until production
+# starts it runs by hand and the page shows the sample data of Z9; at the start (krok 8) the schedule below is switched
+# on together with the repository variable STATUS_MODE=live.
+name: Status
+
+on:
+  workflow_dispatch:
+    inputs:
+      alert_test:
+        description: "Test powiadomienia: zgłoszenie testowe założone i od razu zamknięte"
+        type: boolean
+        default: false
+  # schedule:
+  #   - cron: "*/5 * * * *"
+
+permissions:
+  contents: write
+  issues: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: status
+  cancel-in-progress: false
+
+jobs:
+  status:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+      - name: Check the services and write the page
+        env:
+          STATUS_MODE: ${{ vars.STATUS_MODE }}
+          GITHUB_TOKEN: ${{ github.token }}
+          ALERT_TEST: ${{ inputs.alert_test && '--alert-test' || '' }}
+        run: node monitor/run.ts site _site $ALERT_TEST
+      - name: Keep the history
+        if: vars.STATUS_MODE == 'live'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add state
+          if ! git diff --cached --quiet; then
+            git commit -m "Historia statusu $(date -u +%Y-%m-%dT%H:%MZ)"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: _site
+      - id: deploy
+        uses: actions/deploy-pages@v5

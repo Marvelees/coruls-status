@@ -1,0 +1,22 @@
+2:"$Sreact.fragment"
+3:"/coruls-status/_next/static/chunks/3_mn2w1x0m8m0.js"
+4:"/coruls-status/_next/static/chunks/1blu66awf7j80.js"
+5:"/coruls-status/_next/static/chunks/28s1rkgn8e_i0.js"
+6:I[36741,["$3","$4","$5"],"StatusScreen"]
+7:I[40579,["$3","$4"],"OutletBoundary"]
+8:"$Sreact.suspense"
+c:"ViewportBoundary"
+d:I[40579,["$3","$4"],"$c"]
+e:"MetadataBoundary"
+f:I[40579,["$3","$4"],"$e"]
+10:I[54544,["$3","$4"],"IconMark"]
+b:X
+1:[["children",{"s":"__PAGE__","h":128,"d":{"r":["$","$2","c",{"children":[["$","$L6",null,{}],[["$","script","script-0",{"src":"/coruls-status/_next/static/chunks/28s1rkgn8e_i0.js","async":true}]],["$","$L7",null,{"children":["$","$8",null,{"name":"Next.MetadataOutlet","children":"$@9"}]}]]}],"p":"$@a","v":null,"s":"$b"}}]]
+0:{"t":{"t":{"s":"","h":16,"c":"$Q1"},"h":{"r":["$","$2","h",{"children":[null,["$","$Ld",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","$Lf",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$8",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Status usług · Coruls"}],["$","meta","1",{"name":"description","content":"Stan usług Coruls, incydenty i planowane prace z ostatnich 90 dni."}],["$","meta","2",{"name":"robots","content":"noindex, nofollow"}],["$","link","3",{"rel":"icon","href":"/coruls-status/icon.svg?icon.3mpk83mxmrky3.svg","sizes":"any","type":"image/svg+xml"}],["$","$L10","4",{}]]}]}],null]}],null]}],"p":"$@11","v":null,"s":"$b"}},"a":"$@12","u":"$@13","b":"IBEkmc-pKgAxNAYLFRMeE"}
+9:null
+13:true
+b:300
+b:C
+12:0
+11:"$undefined"
+a:"$undefined"
