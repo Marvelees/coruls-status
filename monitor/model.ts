@@ -22,7 +22,9 @@ export type Incident = {
 };
 /** An incident as the page gets it, with where it stood when the data were made. */
 export type PublishedIncident = Incident & { phase: Phase };
-export type DayStates = { date: string; states: Record<ServiceKey, ServiceState> };
+/** A day of the 90 is „Brak danych” before the monitoring's first check (Z9). */
+export type DayState = ServiceState | "noData";
+export type DayStates = { date: string; states: Record<ServiceKey, DayState> };
 
 /** data/summary.json (getStatusSummary). */
 export type Summary = {
@@ -41,6 +43,8 @@ export type History = { updatedAt: string; days: DayStates[]; incidents: Publish
 export type Stored = {
   /** Warsaw day of the last run; it changes once a day, which keeps the repository active for the schedule. */
   checkedOn: string;
+  /** Warsaw day of the first run; the days before it have no data. */
+  since: string;
   /** Minutes of each problem state per day and service; days without problems are absent. */
   days: Record<string, Partial<Record<ServiceKey, Partial<Record<Exclude<ServiceState, "operational">, number>>>>>;
   /** The state of the last check and how many checks in a row found an outage. */
@@ -106,10 +110,14 @@ export function classify(answer: { status: number | null; ms: number | null; mai
 
 export const emptyStored = (): Stored => ({
   checkedOn: "",
+  since: "",
   days: {},
   services: Object.fromEntries(SERVICES.map((s) => [s, { state: "operational", failures: 0 }])) as Stored["services"],
   issue: null,
 });
+
+/** The day of the first check; a history kept before it was recorded starts at its oldest day. */
+const sinceOf = (stored: Stored, today: string) => stored.since || [stored.checkedOn, ...Object.keys(stored.days)].filter(Boolean).sort()[0] || today;
 
 /** The stored state after one round of checks at `now`: minutes of problems per day, the last states and failures in a row; days past the 90 drop out. */
 export function record(stored: Stored, checks: Check[], incidents: Incident[], now: number): Stored {
@@ -125,7 +133,7 @@ export function record(stored: Stored, checks: Check[], incidents: Incident[], n
     day[check.service] = { ...day[check.service], [state]: (day[check.service]?.[state] ?? 0) + INTERVAL };
     days[today] = day;
   }
-  return { ...stored, checkedOn: today, days, services };
+  return { ...stored, checkedOn: today, since: sinceOf(stored, today), days, services };
 }
 
 /** The services whose outage has lasted long enough for an issue. */
@@ -140,18 +148,21 @@ export function alertAction(before: Stored, after: Stored): { kind: "open" | "up
   return null;
 }
 
-/** Share of the 90 days without an outage, in per cent with two decimals, from outage minutes. */
-const share = (minutes: number) => Math.floor((1 - minutes / (DAYS * 24 * 60)) * 10_000) / 100;
+/** Share of `days` days without an outage, in per cent with two decimals, from outage minutes. */
+const share = (minutes: number, days: number) => Math.floor((1 - minutes / (days * 24 * 60)) * 10_000) / 100;
 
 /**
  * The files of the page at `now`. With stored checks (production) a day's state is the worst of its checks and of the
- * incidents over it, and the availability comes from the checks' outage minutes; without them (sample data) both come
- * from the incidents, as in the prototype.
+ * incidents over it, the days before the first check have no data, and the availability comes from the checks' outage
+ * minutes over the checked days; without them (sample data) both come from the incidents over all 90 days, as in the
+ * prototype.
  */
 export function render(incidents: Incident[], stored: Stored | null, now: number, sample: boolean): { summary: Summary; history: History } {
   const updatedAt = new Date(now).toISOString();
   const seen = incidents.filter((i) => started(i, now));
-  const days = lastDays(now).map((date) => {
+  const since = stored && sinceOf(stored, warsawDate(now));
+  const days = lastDays(now).map((date): DayStates => {
+    if (since && date < since) return { date, states: Object.fromEntries(SERVICES.map((s) => [s, "noData"])) as Record<ServiceKey, DayState> };
     const from = warsawMidnight(date);
     const to = from + 86_400_000;
     const over = seen.filter((i) => Date.parse(i.start) < to && (i.end === null ? now : Date.parse(i.end)) > from);
@@ -166,11 +177,13 @@ export function render(incidents: Incident[], stored: Stored | null, now: number
     return { date, states };
   });
   const active = seen.filter((i) => ongoing(i, now));
+  const checkedDays = since ? days.filter((d) => d.date >= since).length : DAYS;
   const availability = (s: ServiceKey) =>
     share(
       stored
         ? Object.values(stored.days).reduce((sum, day) => sum + (day[s]?.outage ?? 0), 0)
         : seen.filter((i) => i.impact === "outage" && i.services.includes(s)).reduce((sum, i) => sum + ((i.end === null ? now : Date.parse(i.end)) - Date.parse(i.start)) / 60_000, 0),
+      checkedDays,
     );
   const services = SERVICES.map((key) => ({
     key,
