@@ -1,0 +1,27 @@
+{
+  "checkedOn": "2026-10-30",
+  "days": {},
+  "services": {
+    "www": {
+      "state": "operational",
+      "failures": 0
+    },
+    "auth": {
+      "state": "operational",
+      "failures": 0
+    },
+    "aphelion": {
+      "state": "operational",
+      "failures": 0
+    },
+    "ephemeris": {
+      "state": "operational",
+      "failures": 0
+    },
+    "api": {
+      "state": "operational",
+      "failures": 0
+    }
+  },
+  "issue": null
+}
