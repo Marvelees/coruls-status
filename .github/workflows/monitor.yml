@@ -1,6 +1,6 @@
-# Monitoring and the status page of Coruls (D9.28), published from the Coruls repository (apps/status). Until production
-# starts it runs by hand and the page shows the sample data of Z9; at the start (krok 8) the schedule below is switched
-# on together with the repository variable STATUS_MODE=live.
+# Monitoring and the status page of Coruls (D9.28), published from the Coruls repository (apps/status). Since the start
+# of production (krok 8) it runs every 5 minutes with the repository variable STATUS_MODE=live; by hand it can also
+# send a test alert.
 name: Status
 
 on:
@@ -10,8 +10,8 @@ on:
         description: "Test powiadomienia: zgłoszenie testowe założone i od razu zamknięte"
         type: boolean
         default: false
-  # schedule:
-  #   - cron: "*/5 * * * *"
+  schedule:
+    - cron: "*/5 * * * *"
 
 permissions:
   contents: write

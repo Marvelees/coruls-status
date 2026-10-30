@@ -1,4 +1,4 @@
-:HL["/coruls-status/_next/static/chunks/1eclz_7gteniq.css","style"]
+:HL["/_next/static/chunks/1j5mcrhw-6zza.css","style"]
 :HC["/",""]
 1:[["children",{"s":"__PAGE__","h":128}]]
-0:{"b":"imnfqxI9OOnaMvY3InKZo","t":{"t":{"s":"","h":16,"c":"$Q1"}}}
+0:{"b":"vOOiHtu_w-NthDrNW0tao","t":{"t":{"s":"","h":16,"c":"$Q1"}}}
