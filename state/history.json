@@ -21,24 +21,24 @@
   },
   "services": {
     "www": {
-      "state": "maintenance",
+      "state": "operational",
       "failures": 0
     },
     "auth": {
-      "state": "maintenance",
+      "state": "operational",
       "failures": 0
     },
     "aphelion": {
-      "state": "maintenance",
+      "state": "operational",
       "failures": 0
     },
     "ephemeris": {
-      "state": "maintenance",
+      "state": "operational",
       "failures": 0
     },
     "api": {
-      "state": "outage",
-      "failures": 1
+      "state": "operational",
+      "failures": 0
     }
   },
   "issue": null,
