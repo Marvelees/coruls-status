@@ -42,7 +42,7 @@
       "failures": 0
     },
     "api": {
-      "state": "degraded",
+      "state": "operational",
       "failures": 0
     }
   },
