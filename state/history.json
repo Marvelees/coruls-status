@@ -17,6 +17,11 @@
       "api": {
         "outage": 10
       }
+    },
+    "2026-11-02": {
+      "api": {
+        "degraded": 5
+      }
     }
   },
   "services": {
@@ -37,7 +42,7 @@
       "failures": 0
     },
     "api": {
-      "state": "operational",
+      "state": "degraded",
       "failures": 0
     }
   },
