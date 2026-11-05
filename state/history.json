@@ -49,12 +49,18 @@
       },
       "ephemeris": {
         "degraded": 5
+      },
+      "www": {
+        "degraded": 5
+      },
+      "api": {
+        "degraded": 5
       }
     }
   },
   "services": {
     "www": {
-      "state": "operational",
+      "state": "degraded",
       "failures": 0
     },
     "auth": {
@@ -70,7 +76,7 @@
       "failures": 0
     },
     "api": {
-      "state": "operational",
+      "state": "degraded",
       "failures": 0
     }
   },
