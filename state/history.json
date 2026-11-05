@@ -39,6 +39,11 @@
       "api": {
         "outage": 10
       }
+    },
+    "2026-11-05": {
+      "auth": {
+        "degraded": 5
+      }
     }
   },
   "services": {
@@ -47,7 +52,7 @@
       "failures": 0
     },
     "auth": {
-      "state": "operational",
+      "state": "degraded",
       "failures": 0
     },
     "aphelion": {
