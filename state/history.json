@@ -60,7 +60,7 @@
   },
   "services": {
     "www": {
-      "state": "degraded",
+      "state": "operational",
       "failures": 0
     },
     "auth": {
@@ -76,7 +76,7 @@
       "failures": 0
     },
     "api": {
-      "state": "degraded",
+      "state": "operational",
       "failures": 0
     }
   },
