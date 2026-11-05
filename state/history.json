@@ -52,7 +52,7 @@
       "failures": 0
     },
     "auth": {
-      "state": "degraded",
+      "state": "operational",
       "failures": 0
     },
     "aphelion": {
