@@ -43,6 +43,9 @@
     "2026-11-05": {
       "auth": {
         "degraded": 5
+      },
+      "aphelion": {
+        "degraded": 5
       }
     }
   },
@@ -56,7 +59,7 @@
       "failures": 0
     },
     "aphelion": {
-      "state": "operational",
+      "state": "degraded",
       "failures": 0
     },
     "ephemeris": {
