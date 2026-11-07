@@ -79,15 +79,15 @@
       "failures": 0
     },
     "aphelion": {
-      "state": "degraded",
+      "state": "operational",
       "failures": 0
     },
     "ephemeris": {
-      "state": "degraded",
+      "state": "operational",
       "failures": 0
     },
     "api": {
-      "state": "degraded",
+      "state": "operational",
       "failures": 0
     }
   },
