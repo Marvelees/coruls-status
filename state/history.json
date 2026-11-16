@@ -73,7 +73,8 @@
         "degraded": 5
       },
       "ephemeris": {
-        "degraded": 5
+        "degraded": 5,
+        "outage": 5
       },
       "api": {
         "degraded": 5
@@ -90,15 +91,15 @@
       "failures": 0
     },
     "aphelion": {
-      "state": "degraded",
+      "state": "operational",
       "failures": 0
     },
     "ephemeris": {
-      "state": "degraded",
-      "failures": 0
+      "state": "outage",
+      "failures": 1
     },
     "api": {
-      "state": "degraded",
+      "state": "operational",
       "failures": 0
     }
   },
