@@ -134,28 +134,45 @@
       "api": {
         "outage": 5
       }
+    },
+    "2026-11-26": {
+      "www": {
+        "outage": 5
+      },
+      "auth": {
+        "outage": 5
+      },
+      "aphelion": {
+        "outage": 5
+      },
+      "ephemeris": {
+        "outage": 5
+      },
+      "api": {
+        "outage": 5
+      }
     }
   },
   "services": {
     "www": {
-      "state": "operational",
-      "failures": 0
+      "state": "outage",
+      "failures": 1
     },
     "auth": {
-      "state": "operational",
-      "failures": 0
+      "state": "outage",
+      "failures": 1
     },
     "aphelion": {
-      "state": "operational",
-      "failures": 0
+      "state": "outage",
+      "failures": 1
     },
     "ephemeris": {
-      "state": "operational",
-      "failures": 0
+      "state": "outage",
+      "failures": 1
     },
     "api": {
-      "state": "operational",
-      "failures": 0
+      "state": "outage",
+      "failures": 1
     }
   },
   "issue": null,
