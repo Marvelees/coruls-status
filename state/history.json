@@ -155,24 +155,24 @@
   },
   "services": {
     "www": {
-      "state": "outage",
-      "failures": 1
+      "state": "operational",
+      "failures": 0
     },
     "auth": {
-      "state": "outage",
-      "failures": 1
+      "state": "operational",
+      "failures": 0
     },
     "aphelion": {
-      "state": "outage",
-      "failures": 1
+      "state": "operational",
+      "failures": 0
     },
     "ephemeris": {
-      "state": "outage",
-      "failures": 1
+      "state": "operational",
+      "failures": 0
     },
     "api": {
-      "state": "outage",
-      "failures": 1
+      "state": "operational",
+      "failures": 0
     }
   },
   "issue": null,
