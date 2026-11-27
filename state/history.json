@@ -166,7 +166,8 @@
         "maintenance": 5
       },
       "api": {
-        "outage": 10
+        "outage": 10,
+        "degraded": 5
       },
       "www": {
         "maintenance": 5
@@ -191,7 +192,7 @@
       "failures": 0
     },
     "api": {
-      "state": "operational",
+      "state": "degraded",
       "failures": 0
     }
   },
