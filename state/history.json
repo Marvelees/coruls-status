@@ -177,7 +177,7 @@
   },
   "services": {
     "www": {
-      "state": "degraded",
+      "state": "operational",
       "failures": 0
     },
     "auth": {
