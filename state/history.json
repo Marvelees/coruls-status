@@ -170,13 +170,14 @@
         "degraded": 5
       },
       "www": {
-        "maintenance": 5
+        "maintenance": 5,
+        "degraded": 5
       }
     }
   },
   "services": {
     "www": {
-      "state": "operational",
+      "state": "degraded",
       "failures": 0
     },
     "auth": {
