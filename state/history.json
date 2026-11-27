@@ -154,39 +154,45 @@
     },
     "2026-11-27": {
       "auth": {
-        "degraded": 5
+        "degraded": 5,
+        "maintenance": 5
       },
       "aphelion": {
-        "degraded": 5
+        "degraded": 5,
+        "maintenance": 5
       },
       "ephemeris": {
-        "degraded": 5
+        "degraded": 5,
+        "maintenance": 5
       },
       "api": {
-        "outage": 5
+        "outage": 10
+      },
+      "www": {
+        "maintenance": 5
       }
     }
   },
   "services": {
     "www": {
-      "state": "operational",
+      "state": "maintenance",
       "failures": 0
     },
     "auth": {
-      "state": "operational",
+      "state": "maintenance",
       "failures": 0
     },
     "aphelion": {
-      "state": "operational",
+      "state": "maintenance",
       "failures": 0
     },
     "ephemeris": {
-      "state": "operational",
+      "state": "maintenance",
       "failures": 0
     },
     "api": {
-      "state": "operational",
-      "failures": 0
+      "state": "outage",
+      "failures": 1
     }
   },
   "issue": null,
