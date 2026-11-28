@@ -6,7 +6,7 @@
 
 import { appendFile, cp, mkdir, readdir, readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
-import { alertAction, classify, emptyStored, parseIncident, phaseOf, record, render, SERVICES, type Check, type Incident, type ServiceKey, type Stored } from "./model.ts";
+import { alertAction, better, classify, emptyStored, isMaintenanceAnswer, needsRetry, parseIncident, phaseOf, record, render, RETRY_MS, SERVICES, type Check, type Incident, type ServiceKey, type Stored } from "./model.ts";
 
 const URLS: Record<ServiceKey, string> = {
   www: "https://coruls.com/",
@@ -21,8 +21,6 @@ const PAGE = "https://status.coruls.com";
 const TIMEOUT = 10_000;
 /** The reference time of the personas' sample data, Thu 8.10.2026, 12:00. */
 const SAMPLE_NOW = Date.parse("2026-10-08T12:00:00+02:00");
-/** Caddy's works page (deploy/caddy/pages/prace.html) carries this, so works are not an outage. */
-const MAINTENANCE_PAGE = '<meta name="coruls-page" content="maintenance">';
 const STATE = "state/history.json";
 
 const time = (ms: number) => new Intl.DateTimeFormat("pl-PL", { timeZone: "Europe/Warsaw", day: "numeric", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" }).format(ms);
@@ -32,11 +30,19 @@ async function check(service: ServiceKey): Promise<Check> {
   try {
     const response = await fetch(URLS[service], { redirect: "manual", signal: AbortSignal.timeout(TIMEOUT), headers: { "user-agent": "coruls-status (+https://github.com/Marvelees/coruls-status)" } });
     const ms = Math.round(performance.now() - started);
-    const maintenancePage = response.status === 503 && (await response.text()).includes(MAINTENANCE_PAGE);
+    const maintenancePage = response.status === 503 && isMaintenanceAnswer(response.status, await response.text());
     return { service, state: classify({ status: response.status, ms, maintenancePage }), status: response.status, ms };
   } catch {
     return { service, state: "outage", status: null, ms: null };
   }
+}
+
+/** A failed or slow check is repeated once after a while and the milder of the two counts. */
+async function confirmed(service: ServiceKey): Promise<Check> {
+  const first = await check(service);
+  if (!needsRetry(first)) return first;
+  await new Promise((resolve) => setTimeout(resolve, RETRY_MS));
+  return better(first, await check(service));
 }
 
 async function incidents(folder: string): Promise<Incident[]> {
@@ -99,7 +105,7 @@ const [site, out] = process.argv.slice(2).filter((arg) => !arg.startsWith("--"))
 if (!site || !out) throw new Error("usage: node monitor/run.ts <built site> <output folder> [--alert-test]");
 const live = process.env.STATUS_MODE === "live";
 const now = Date.now();
-const checks = await Promise.all(SERVICES.map(check));
+const checks = await Promise.all(SERVICES.map(confirmed));
 
 const report = [`## Sprawdzenie ${time(now)}${live ? "" : " (dane przykładowe na stronie)"}`, "", "| Usługa | Stan | Odpowiedź | Czas |", "|---|---|---|---|", ...checks.map((c) => `| ${NAMES[c.service]} | ${STATES[c.state]} | ${c.status ?? "brak"} | ${c.ms === null ? "—" : `${c.ms} ms`} |`)].join("\n");
 console.log(report);

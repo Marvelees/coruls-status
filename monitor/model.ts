@@ -100,6 +100,17 @@ const publish = (incident: Incident, now: number): PublishedIncident => ({ ...in
 export const underMaintenance = (incidents: Incident[], service: ServiceKey, now: number) =>
   incidents.some((i) => i.kind === "maintenance" && i.services.includes(service) && ongoing(i, now));
 
+/** Caddy's works page (deploy/caddy/pages/prace.html) carries this, so works are not an outage. */
+export const MAINTENANCE_PAGE = '<meta name="coruls-page" content="maintenance">';
+/** Caddy's answer during works (D9.29): the works page, or for the public API its JSON error `maintenance` (D9.188). */
+export const isMaintenanceAnswer = (status: number, body: string) => status === 503 && (body.includes(MAINTENANCE_PAGE) || /"code"\s*:\s*"maintenance"/.test(body));
+
+/** Seconds before a failed or slow check is repeated, so one lost request or a cold start after a deploy is not a problem. */
+export const RETRY_MS = 15_000;
+export const needsRetry = (check: Check) => check.state === "outage" || check.state === "degraded";
+/** Of a check and its repetition the one with the milder state counts. */
+export const better = (first: Check, second: Check) => (SEVERITY[second.state] < SEVERITY[first.state] ? second : first);
+
 /** One check's state from the answer: no answer or an error is an outage, Caddy's works page is works (D9.29), a slow answer disruptions. */
 export function classify(answer: { status: number | null; ms: number | null; maintenancePage: boolean }): ServiceState {
   if (answer.status === null || answer.ms === null) return "outage";
