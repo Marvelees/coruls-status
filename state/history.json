@@ -195,23 +195,23 @@
   },
   "services": {
     "www": {
-      "state": "maintenance",
+      "state": "operational",
       "failures": 0
     },
     "auth": {
-      "state": "maintenance",
+      "state": "operational",
       "failures": 0
     },
     "aphelion": {
-      "state": "maintenance",
+      "state": "operational",
       "failures": 0
     },
     "ephemeris": {
-      "state": "maintenance",
+      "state": "operational",
       "failures": 0
     },
     "api": {
-      "state": "maintenance",
+      "state": "operational",
       "failures": 0
     }
   },
