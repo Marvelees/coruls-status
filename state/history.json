@@ -1,1 +1,203 @@
-{"checkedOn": "2026-11-28", "days": {"2026-10-31": {"www": {"maintenance": 10}, "auth": {"maintenance": 10}, "aphelion": {"maintenance": 10}, "ephemeris": {"maintenance": 10}, "api": {"maintenance": 10}}, "2026-11-02": {"api": {"degraded": 5}}, "2026-11-04": {"www": {"maintenance": 10}, "auth": {"maintenance": 10}, "aphelion": {"maintenance": 10}, "ephemeris": {"maintenance": 10}, "api": {"maintenance": 10}}, "2026-11-05": {"auth": {"degraded": 5}, "aphelion": {"degraded": 5}, "ephemeris": {"degraded": 5}, "www": {"degraded": 5}, "api": {"degraded": 5}}, "2026-11-07": {"aphelion": {"degraded": 5}, "ephemeris": {"degraded": 5}, "api": {"degraded": 5}}, "2026-11-16": {"aphelion": {"degraded": 5}, "ephemeris": {"degraded": 15, "outage": 5}, "api": {"degraded": 10}, "auth": {"degraded": 5}}, "2026-11-20": {"aphelion": {"degraded": 5, "maintenance": 10}, "www": {"maintenance": 10}, "auth": {"maintenance": 10}, "ephemeris": {"maintenance": 10}, "api": {"maintenance": 10}}, "2026-11-22": {"www": {"maintenance": 5}, "auth": {"maintenance": 5}, "aphelion": {"maintenance": 5}, "ephemeris": {"maintenance": 5}, "api": {"maintenance": 5}}, "2026-11-23": {"www": {"maintenance": 5}, "auth": {"maintenance": 5}, "aphelion": {"maintenance": 5}, "ephemeris": {"maintenance": 5}, "api": {"maintenance": 5}}, "2026-11-26": {"www": {"outage": 5}, "auth": {"outage": 5}, "aphelion": {"outage": 5}, "ephemeris": {"outage": 5}, "api": {"outage": 5}}, "2026-11-27": {"auth": {"degraded": 5, "maintenance": 5}, "aphelion": {"degraded": 5, "maintenance": 5}, "ephemeris": {"degraded": 5, "maintenance": 5}, "api": {"outage": 5, "degraded": 5, "maintenance": 5}, "www": {"maintenance": 5, "degraded": 5}}}, "services": {"www": {"state": "operational", "failures": 0}, "auth": {"state": "operational", "failures": 0}, "aphelion": {"state": "operational", "failures": 0}, "ephemeris": {"state": "operational", "failures": 0}, "api": {"state": "operational", "failures": 0}}, "issue": null, "since": "2026-10-30"}
+{
+  "checkedOn": "2026-11-28",
+  "days": {
+    "2026-10-31": {
+      "www": {
+        "maintenance": 10
+      },
+      "auth": {
+        "maintenance": 10
+      },
+      "aphelion": {
+        "maintenance": 10
+      },
+      "ephemeris": {
+        "maintenance": 10
+      },
+      "api": {
+        "maintenance": 10
+      }
+    },
+    "2026-11-02": {
+      "api": {
+        "degraded": 5
+      }
+    },
+    "2026-11-04": {
+      "www": {
+        "maintenance": 10
+      },
+      "auth": {
+        "maintenance": 10
+      },
+      "aphelion": {
+        "maintenance": 10
+      },
+      "ephemeris": {
+        "maintenance": 10
+      },
+      "api": {
+        "maintenance": 10
+      }
+    },
+    "2026-11-05": {
+      "auth": {
+        "degraded": 5
+      },
+      "aphelion": {
+        "degraded": 5
+      },
+      "ephemeris": {
+        "degraded": 5
+      },
+      "www": {
+        "degraded": 5
+      },
+      "api": {
+        "degraded": 5
+      }
+    },
+    "2026-11-07": {
+      "aphelion": {
+        "degraded": 5
+      },
+      "ephemeris": {
+        "degraded": 5
+      },
+      "api": {
+        "degraded": 5
+      }
+    },
+    "2026-11-16": {
+      "aphelion": {
+        "degraded": 5
+      },
+      "ephemeris": {
+        "degraded": 15,
+        "outage": 5
+      },
+      "api": {
+        "degraded": 10
+      },
+      "auth": {
+        "degraded": 5
+      }
+    },
+    "2026-11-20": {
+      "aphelion": {
+        "degraded": 5,
+        "maintenance": 10
+      },
+      "www": {
+        "maintenance": 10
+      },
+      "auth": {
+        "maintenance": 10
+      },
+      "ephemeris": {
+        "maintenance": 10
+      },
+      "api": {
+        "maintenance": 10
+      }
+    },
+    "2026-11-22": {
+      "www": {
+        "maintenance": 5
+      },
+      "auth": {
+        "maintenance": 5
+      },
+      "aphelion": {
+        "maintenance": 5
+      },
+      "ephemeris": {
+        "maintenance": 5
+      },
+      "api": {
+        "maintenance": 5
+      }
+    },
+    "2026-11-23": {
+      "www": {
+        "maintenance": 5
+      },
+      "auth": {
+        "maintenance": 5
+      },
+      "aphelion": {
+        "maintenance": 5
+      },
+      "ephemeris": {
+        "maintenance": 5
+      },
+      "api": {
+        "maintenance": 5
+      }
+    },
+    "2026-11-26": {
+      "www": {
+        "outage": 5
+      },
+      "auth": {
+        "outage": 5
+      },
+      "aphelion": {
+        "outage": 5
+      },
+      "ephemeris": {
+        "outage": 5
+      },
+      "api": {
+        "outage": 5
+      }
+    },
+    "2026-11-27": {
+      "auth": {
+        "degraded": 5,
+        "maintenance": 5
+      },
+      "aphelion": {
+        "degraded": 5,
+        "maintenance": 5
+      },
+      "ephemeris": {
+        "degraded": 5,
+        "maintenance": 5
+      },
+      "api": {
+        "outage": 5,
+        "degraded": 5,
+        "maintenance": 5
+      },
+      "www": {
+        "maintenance": 5,
+        "degraded": 5
+      }
+    }
+  },
+  "services": {
+    "www": {
+      "state": "operational",
+      "failures": 0
+    },
+    "auth": {
+      "state": "operational",
+      "failures": 0
+    },
+    "aphelion": {
+      "state": "operational",
+      "failures": 0
+    },
+    "ephemeris": {
+      "state": "operational",
+      "failures": 0
+    },
+    "api": {
+      "state": "operational",
+      "failures": 0
+    }
+  },
+  "issue": null,
+  "since": "2026-10-30"
+}
