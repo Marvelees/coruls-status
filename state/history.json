@@ -174,27 +174,44 @@
         "maintenance": 5,
         "degraded": 5
       }
+    },
+    "2026-11-28": {
+      "www": {
+        "maintenance": 5
+      },
+      "auth": {
+        "maintenance": 5
+      },
+      "aphelion": {
+        "maintenance": 5
+      },
+      "ephemeris": {
+        "maintenance": 5
+      },
+      "api": {
+        "maintenance": 5
+      }
     }
   },
   "services": {
     "www": {
-      "state": "operational",
+      "state": "maintenance",
       "failures": 0
     },
     "auth": {
-      "state": "operational",
+      "state": "maintenance",
       "failures": 0
     },
     "aphelion": {
-      "state": "operational",
+      "state": "maintenance",
       "failures": 0
     },
     "ephemeris": {
-      "state": "operational",
+      "state": "maintenance",
       "failures": 0
     },
     "api": {
-      "state": "operational",
+      "state": "maintenance",
       "failures": 0
     }
   },
